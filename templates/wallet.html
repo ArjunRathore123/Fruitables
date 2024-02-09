@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block wallet %}
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>E-wallet</title>
+	
+    <style>
+        
+
+.wallet-container {
+	background: linear-gradient(rgba(0, 0, 0, 0.6),rgba(107, 220, 15, 0.694)),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjOvSperRYjHH9-EHlKZJBfwvXy4rJpyerzHQsnp8DuuycYU5_);
+		width: 320px;
+		color: #fff;
+		font-size: 15px;
+		padding: 20px 20px 0;
+		margin-top: 15%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		position: relative;
+  
+  
+}
+
+.page-title {
+	text-align: left;
+}
+
+.fa-user {
+	float: right;
+}
+
+.fa-align-left {
+	margin-right: 15px;
+}
+
+.amount-box img {
+	width: 50px;
+}
+
+.amount {
+	font-size: 35px;
+}
+
+.amount-box p {
+	margin-top: 10px;
+	margin-bottom: -10px;
+}
+
+
+
+    </style>
+</head>
+<body>
+	<div class="wallet-container text-center">
+		<p class="page-title"><i class="fa fa-align-left"></i>{{wallet.user.first_name}} E-wallet<i class="fa fa-user"></i></p>
+
+		<div class="amount-box text-center">
+			<img src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw" alt="wallet">
+			<p>Total Balance</p>
+			<p class="amount">$ {{wallet.balance}}</p>
+		</div>		
+			</div>
+</div>
+<h2>Add Money to Your Wallet</h2>
+<form method="post" action="{% url 'addmoney' %}">
+    {% csrf_token %}
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" step="0.01" required>
+    <button type="submit">Add Money</button>
+</form>
+
+{% endblock wallet %}

@@ -1,4 +1,4 @@
-from .views import home,register,login,registered,handlelogout,handlelogin
+from .views import home,register,login,registered,handlelogout,handlelogin,contactus,send_mail
 from django.urls import path
 
 urlpatterns = [
@@ -7,5 +7,7 @@ urlpatterns = [
     path('login/',login,name='login'),
     path('register',registered,name='signup'),
     path('login',handlelogin,name='signin'),
-    path('logout',handlelogout,name='logout')
+    path('logout',handlelogout,name='logout'),
+    path('contactus/',contactus,name='contactus'),
+    path('sendemail',send_mail,name='sendmail')
 ]
