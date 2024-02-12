@@ -120,22 +120,14 @@ def success(request):
     else:
         order.is_paid=False
         order.save()
-    print(order)
+        return render(request,'checkout.html',{'error':"Insufficient Balance"})
+        print(order)
     return render(request,'success.html',{'order_id':order_id})
 
 def wallet(request):
     wallet=Wallet.objects.get(user=request.user)
     return render(request,'wallet.html',{'wallet':wallet})
 
-def addmoney(request):
-    if request.method == 'POST':
-        amount = float(request.POST.get('amount', 0.00))
-        user_wallet = Wallet.objects.get(user=request.user)
-        print("======",amount)
-        user_wallet.balance += amount
-        user_wallet.save()
 
-        messages.success(request, f'Successfully added {amount} to your wallet!')
-        return redirect('wallet_view')
 
-    return render(request, 'add_money.html')
+

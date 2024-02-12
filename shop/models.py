@@ -12,7 +12,7 @@ class Product(models.Model):
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     product_image=models.ImageField(upload_to='products')
     product_name=models.CharField(max_length=100)
-    price=models.DecimalField(max_digits=10,decimal_places=2)
+    price=models.PositiveIntegerField()
     quantity=models.PositiveIntegerField(default=0)
     description=models.TextField()
 
@@ -54,14 +54,18 @@ class Order(models.Model):
     
 class Wallet(models.Model):
     user=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
-    balance=models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    balance=models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return f"{self.user.first_name}'s Buyer Wallet"
+    
+    def add_money(self, amount):
+        self.balance += amount
+        self.save()
 
 class AdminWallet(models.Model):
     user=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
-    balance=models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    balance=models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.first_name}'s Admin Wallet"

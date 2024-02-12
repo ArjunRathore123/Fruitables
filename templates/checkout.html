@@ -12,7 +12,8 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <h1 class="mb-4">Billing details</h1>
-                {% for i in cart%}
+                {% if cart %}
+                        {% for i in cart%}
                         <form action="{%url 'order' i.product.id%}" method="POST">
                         {% endfor %}
                     <div class="row g-5">
@@ -118,6 +119,116 @@
                         </div>
                     </div>
                 </form>
+                {% else %}
+                {% for i in cart%}
+                        <form action="{%url 'order' i.product.id%}" method="POST">
+                        {% endfor %}
+                    <div class="row g-5">
+                        
+                        
+                        <div class="col-md-12 col-lg-6 col-xl-7">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">First Name<sup>*</sup></label>
+                                        <input type="text" name='first' class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">Last Name<sup>*</sup></label>
+                                        <input type="text" name='last' class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Address <sup>*</sup></label>
+                                <input type="text" class="form-control" required name='address' placeholder="Enter Address">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Town/City<sup>*</sup></label>
+                                <input type="text" class="form-control" required name='city'>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Postcode/Zip<sup>*</sup></label>
+                                <input type="text" class="form-control" required name='pincode'>
+                            </div>
+
+                            <div class="form-item">
+                                <label class="form-label my-3">Mobile<sup>*</sup></label>
+                                <input type="tel" class="form-control" required name='contact'>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Email Address<sup>*</sup></label>
+                                <input type="email" class="form-control" required name='email'>
+                            </div>
+                    
+                        </div>
+                        
+                        <div class="col-md-12 col-lg-6 col-xl-5">
+                            <div class="table-responsive">
+                                
+                                <table class="table">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Products</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in cart %}
+                                        <tr>
+                                           
+                                            <th scope="row">
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <img src="{{i.product.product_image.url}}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                                                </div>
+                                            </th>
+                                            <td class="py-5">{{i.product.product_name}}</td>
+                                            <td class="py-5">${{i.product.price}}</td>
+                                            <td class="py-5">{{i.quantity}}</td>
+                                            <td class="py-5">${{i.subtotal}}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}  
+                                        
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-5">
+                                                <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                                            </td>
+                                            <td class="py-5"></td>
+                                            <td class="py-5"></td>
+                                            <td class="py-5">
+                                                <div class="py-3 border-bottom border-top">
+                                                    <p class="mb-0 text-dark">${{tprice}}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                            
+                            <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                                {% csrf_token %}
+                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
+                            </div>
+                            <p>{{error}}</p>
+                            <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                                <button id='rzp-button1' class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Payment Method</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+               {% endif %}
+            
             </div>
         </div>
         <!-- Checkout Page End -->

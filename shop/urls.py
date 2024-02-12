@@ -1,4 +1,4 @@
-from .views import shop,viewcart,addtocart,updatequantity,removecart,checkout,placeorder,success,wallet,addmoney
+from .views import shop,viewcart,addtocart,updatequantity,removecart,checkout,placeorder,success,wallet
 from django.urls import path
 
 urlpatterns = [
@@ -11,5 +11,4 @@ urlpatterns = [
     path('placeorder/<int:pk>/',placeorder,name='order'),
     path('success/',success,name='success'),
     path('wallet',wallet,name='wallet'),
-    path('addmoney/',addmoney,name='addmoney')
-]
+]   

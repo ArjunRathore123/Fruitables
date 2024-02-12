@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('fruitable/',include('buyers.urls')),
     path('fruitable/',include('shop.urls')),
+    path('UserApi/',include('buyers.api.urls')),
+    path('ShopApi/',include('shop.api.urls')),
 ]
 
 if settings.DEBUG:
