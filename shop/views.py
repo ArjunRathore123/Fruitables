@@ -121,7 +121,7 @@ def success(request):
         order.is_paid=False
         order.save()
         return render(request,'checkout.html',{'error':"Insufficient Balance"})
-        print(order)
+      
     return render(request,'success.html',{'order_id':order_id})
 
 def wallet(request):

@@ -34,13 +34,13 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     user=models.ForeignKey(CustomUser,blank=True,null=True,on_delete=models.SET_NULL)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
     contact=models.CharField(max_length=10)
     address=models.TextField()
     city=models.CharField(max_length=100)
     pincode=models.CharField(max_length=100)
-    product=models.ForeignKey(Product,on_delete=models.CASCADE)
     email=models.EmailField(null=True)
     is_paid=models.BooleanField(default=False)
     razorpay_payment_id=models.CharField(max_length=100,null=True,blank=True)
