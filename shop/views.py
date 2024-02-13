@@ -97,7 +97,7 @@ def placeorder(request,pk):
     order.save()
      
 
-    context={'payment':payment,'total_price':price}
+    context={'payment':payment,'total_price':price,'order':order}
     return render(request,'checkout.html',context)
 
 
