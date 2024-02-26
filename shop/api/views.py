@@ -102,6 +102,7 @@ class ProductView(APIView):
         product.price = price
         product.quantity = qty
         product.description = desc
+        product.category=category
         product.save()
 
         context={
@@ -350,7 +351,7 @@ class PaymentSuccessView(APIView):
 
         if order.is_paid:
             return Response({'error': 'Order is already paid'}, status=status.HTTP_400_BAD_REQUEST)
-        buyerwallet=Wallet.objects.get(user=user)
+        buyerwallet,created=Wallet.objects.get_or_create(user=user)
         adminwallet,created=AdminWallet.objects.get_or_create(user=admin)
         if buyerwallet.balance>=order_amount:
             buyerwallet.balance-=order_amount

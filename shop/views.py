@@ -103,7 +103,7 @@ def placeorder(request,pk):
 
 def success(request):
     user=CustomUser.objects.get(id=request.user.id)
-    buyerwallet=Wallet.objects.get(user=user)
+    buyerwallet,created=Wallet.objects.get_or_create(user=user)
     admin=CustomUser.objects.get(email='admin@gmail.com')
     adminwallet,created=AdminWallet.objects.get_or_create(user=admin)
     order_id=request.GET.get('order_id')
@@ -113,9 +113,11 @@ def success(request):
     if buyerwallet.balance>=order_amount:
         buyerwallet.balance-=order_amount
         adminwallet.balance+=order_amount
-        order.is_paid =True     
+        
+        order.is_paid =True    
+        buyerwallet.save() 
         order.save()
-        buyerwallet.save()
+        
         adminwallet.save()
     else:
         order.is_paid=False

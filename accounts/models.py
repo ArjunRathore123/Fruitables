@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .manager import CustomManager
 from django.utils import timezone
 # Create your models here.
+
 class CustomUser(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField(unique=True)
     first_name=models.CharField(max_length=100)
